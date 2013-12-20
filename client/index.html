@@ -3,8 +3,9 @@
   <head>
     <title>ArtLife</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styling.css">
     <style>
       body {
         padding-top: 60px;
@@ -14,7 +15,9 @@
       function LifeController($scope) {
         var socket = io.connect();
 
-        $scope.count= '20';
+        $scope.startParameters = {
+            herbivoreCount: '20'
+        };
 
         socket.on('connect', function () {
         //   $scope.setName();
@@ -26,8 +29,7 @@
         });
 
         $scope.begin = function begin() {
-          console.log('Sending count:', $scope.count);
-          socket.emit('count', $scope.count);
+          socket.emit('startParameters', $scope.startParameters);
         };
       }
     </script>
@@ -41,12 +43,12 @@
         <div class="span3">
           <p class="lead">parameters</p>
           <form class="form-vertical" ng-submit="begin()">
-            <label>organism count</label>
-            <input type="text" class="input-small" ng-model="count"><br>
-            <input type="submit" class="btn btn-primary" value="Begin" ng-disabled="!count">
+            <label>herbivore count</label>
+            <input type="text" class="input-small" ng-model="startParameters.herbivoreCount"><br>
+            <input type="submit" class="btn btn-primary" value="Begin" ng-disabled="!startParameters.herbivoreCount">
           </form>
         </div>
-        <div class="span9">
+        <div class="ecosystem span9">
           <p class="lead">ecosystem</p>
         </div>
       </div>

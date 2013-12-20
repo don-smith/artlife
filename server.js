@@ -38,8 +38,7 @@ io.on('connection', function (socket) {
     socket.on('message', function (msg) {
       var text = String(msg || '');
 
-      if (!text)
-        return;
+      if (!text) return;
 
       socket.get('name', function (err, name) {
         var data = {
@@ -52,15 +51,10 @@ io.on('connection', function (socket) {
       });
     });
 
-    socket.on('count', function(count) {
-        console.log(count + ' received');
+    socket.on('startParameters', function(params) {
+        console.log('herbivore count: ' + params.herbivoreCount);
     })
 
-    socket.on('identify', function (name) {
-      socket.set('name', String(name || 'Anonymous'), function (err) {
-        updateRoster();
-      });
-    });
   });
 
 function updateRoster() {

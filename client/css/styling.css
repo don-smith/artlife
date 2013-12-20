@@ -1,0 +1,23 @@
+body {
+  background: #fff;
+}
+
+ellipse {
+  fill: #f00;
+  fill: silver;
+}
+
+path {
+  fill: none;
+  stroke: #000;
+  stroke-linecap: round;
+}
+
+.mid {
+  stroke: #00f;
+  stroke-width: 4px;
+}
+
+.tail {
+  stroke-width: 2px;
+}
