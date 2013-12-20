@@ -1,7 +1,7 @@
 //
 // # SimpleServer
 //
-// A simple chat server using Socket.IO, Express, and Async.
+// A simple server using Socket.IO, Express, and Async.
 //
 var http = require('http');
 var path = require('path');
@@ -21,19 +21,18 @@ var server = http.createServer(router);
 var io = socketio.listen(server);
 
 router.use(express.static(path.resolve(__dirname, 'client')));
-var messages = [];
 var sockets = [];
 
 io.on('connection', function (socket) {
-    messages.forEach(function (data) {
-      socket.emit('message', data);
-    });
+    // messages.forEach(function (data) {
+    //   socket.emit('message', data);
+    // });
 
     sockets.push(socket);
 
     socket.on('disconnect', function () {
       sockets.splice(sockets.indexOf(socket), 1);
-      updateRoster();
+    //   updateRoster();
     });
 
     socket.on('message', function (msg) {
@@ -49,9 +48,13 @@ io.on('connection', function (socket) {
         };
 
         broadcast('message', data);
-        messages.push(data);
+        // messages.push(data);
       });
     });
+
+    socket.on('count', function(count) {
+        console.log(count + ' received');
+    })
 
     socket.on('identify', function (name) {
       socket.set('name', String(name || 'Anonymous'), function (err) {
@@ -80,5 +83,5 @@ function broadcast(event, data) {
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();
-  console.log("Chat server listening at", addr.address + ":" + addr.port);
+  console.log("Life server listening at", addr.address + ":" + addr.port);
 });
