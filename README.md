@@ -1,26 +1,18 @@
+                
+                   `..   `..       `..
+                   `..   `.. `.  `.
+   `..    `. `...`.`. `. `..   `.`. `.   `..
+ `..  `..  `..     `..   `..`..  `..   `.   `..
+`..   `..  `..     `..   `..`..  `..  `..... `..
+`..   `..  `..     `..   `..`..  `..  `.
+  `.. `...`...      `.. `...`..  `..    `....            
+            
 
-    ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+ArtLife: Computational life as exploratory art
 
+A personal project positioned at the crossroads of computational biology, artificial life, machine learning, digital art and related interests. Built using JavaScript on top of node.js and d3.js.
 
-Welcome to Cloud9 IDE!
+I'll do my best to keep this README up to date as I progress on this project. The majority of what I have in mind for this project will have to first be learned so I suspect it will be slow-going, but if I can get what is in my head into the code window, the result will be pretty cool.
 
-To get you started, we have created a demo chat application.
-
-1) Open the server.js file
-
-2) Click the 'Run' button at the top to start your server,
-
-3) Click the URL that is emitted to the Output tab of the console
-
-Happy coding!
-The Cloud9 IDE team
-
-## Support & Documentation
-
-Visit http://docs.c9.io for documentation, or http://support.c9.io for support.
-To watch some training videos, visit http://www.youtube.com/user/c9ide.
+Cheers,
+Don
