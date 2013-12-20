@@ -1,13 +1,23 @@
 {
-  "name": "chat-example",
-  "version": "0.0.0",
-  "description": "A chat example to showcase how to use `socket.io` with a static `express` server",
-  "main": "server.js",
-  "repository": "",
-  "author": "Mostafa Eweda <mostafa@c9.io>",
-  "dependencies": {
-    "async": "~0.2.8",
-    "express": "~3.2.4",
-    "socket.io": "~0.9.14"
+  "name": "artlife"
+, "version": "0.0.1"
+, "description": "A personal project positioned at the crossroads of computational biology, artificial life, machine learning, digital art and related interests."
+, "homepage": "https://github.com/locksmithdon/artlife"
+, "author": {
+    "name": "Don Smith"
+  , "email": "locksmithdon@gmail.com"
+  , "url": "http://about.me/don.smith"
   }
+, "repository": {
+    "type": "git"
+  , "url": "https://github.com/locksmithdon/artlife"
+  }
+, "bugs": "https://github.com/locksmithdon/artlife/issues"
+, "main": "server.js"
+, "dependencies": {
+    "async": "~0.2.8"
+  , "express": "~3.2.4"
+  , "socket.io": "~0.9.14"
+  }
+, "license": "MIT"
 }

@@ -6,32 +6,7 @@
     <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styling.css">
-    <style>
-      body {
-        padding-top: 60px;
-      }
-    </style>
     <script>
-      function LifeController($scope) {
-        var socket = io.connect();
-
-        $scope.startParameters = {
-            herbivoreCount: '20'
-        };
-
-        socket.on('connect', function () {
-        //   $scope.setName();
-        });
-
-        socket.on('activity', function (activity) {
-        //   $scope.messages.push(msg);
-        //   $scope.$apply();
-        });
-
-        $scope.begin = function begin() {
-          socket.emit('startParameters', $scope.startParameters);
-        };
-      }
     </script>
   </head>
   <body>
