@@ -20,8 +20,9 @@
           <form class="form-vertical" ng-submit="begin()">
             <label>herbivore count</label>
             <input type="text" class="input-small" ng-model="startParameters.herbivoreCount"><br>
-            <input type="submit" class="btn btn-primary" value="Begin" ng-disabled="!startParameters.herbivoreCount">
+            <input class="input-small btn btn-primary" value="Begin" ng-click="begin()" ng-disabled="!startParameters.herbivoreCount">
           </form>
+          <input class="input-small btn btn-primary" value="Reset" ng-click="reset()">
         </div>
         <div class="ecosystem span9">
           <p class="lead">ecosystem</p>

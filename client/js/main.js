@@ -1,7 +1,10 @@
-var width = 600
-  , height = 500
+var eco
+  , width = 680
+  , height = 440
   , herbivoreCount = 20
   ;
+
+showEmptyEcosystem();
 
 function LifeController($scope) {
   var socket = io.connect();
@@ -11,96 +14,71 @@ function LifeController($scope) {
       height: height
     , width: width
     }
-    , herbivoreCount: '20'
+    , herbivoreCount: $scope.herbivoreCount
+    , serverSampleRate: $scope.serverSampleRate
   };
 
   socket.on('connect', function () {
   //  $scope.setName();
   });
 
-  socket.on('activity', function (activity) {
-  //  $scope.messages.push(msg);
-  //  $scope.$apply();
+  socket.on('activity', function (activities) {
+    console.log(activities);
+    display(activities);
+    //  $scope.messages.push(msg);
+    //  $scope.$apply();
   });
 
   $scope.begin = function begin() {
-    socket.emit('startParameters', $scope.startParameters);
+    socket.emit('startWithParameters', $scope.startParameters);
+  };
+
+  $scope.reset = function reset() {
+    resetEcosystem();
   };
 }
 
-var m = 1
-  , degrees = 180 / Math.PI;
+function resetEcosystem() {
+  d3.select(".ecosystem").selectAll("g").remove();
+}
 
-var spermatozoa = d3.range(20).map(function() {
-  var x = Math.random() * width
-    , y = Math.random() * height;
-  return {
-      vx: Math.random() * 2 - 1
-    , vy: Math.random() * 2 - 1
-    , path: d3.range(m).map(function() { return [x, y]; })
-    , count: 0
-  };
-});
+function showEmptyEcosystem() {
+  resetEcosystem();
+  eco = d3.select(".ecosystem").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+  eco.append("rect")
+      .attr("x", 1)
+      .attr("y", 1)
+      .attr("fill-opacity", "0")
+      .attr("stroke", "silver")
+      .attr("width", width - 1)
+      .attr("height", height - 1);
+}
 
-var svg = d3.select(".ecosystem").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+function display(activities) {
+  var degrees = 180 / Math.PI;
 
-var g = svg.selectAll("g")
-  .data(spermatozoa)
-  .enter().append("g");
+  var spermatozoa = activities.map(function(a) {
+    return {
+        vx: Math.random() * 2 - 1
+      , vy: Math.random() * 2 - 1
+      , path: d3.range(6).map(function() { return [a.x, a.y]; })
+      , count: 0
+    };
+  });
 
-var head = g.append("ellipse")
-  .attr("rx", 6.5)
-  .attr("ry", 4);
+  var g = eco.selectAll("g")
+    .data(spermatozoa)
+    .enter().append("g");
 
-g.append("path")
-  .datum(function(d) { return d.path.slice(0, 3); })
-  .attr("class", "mid");
+  var head = g.append("ellipse")
+    .attr("rx", 6.5)
+    .attr("ry", 4);
 
-g.append("path")
-  .datum(function(d) { return d.path; })
-  .attr("class", "tail");
+  head.attr("transform", headTransform);
 
-var tail = g.selectAll("path");
-
-d3.timer(function() {
-  for (var i = -1; ++i < 20;) {
-    var spermatozoon = spermatozoa[i]
-      , path = spermatozoon.path
-      , dx = spermatozoon.vx
-      , dy = spermatozoon.vy
-      , x = path[0][0] += dx
-      , y = path[0][1] += dy
-      , speed = Math.sqrt(dx * dx + dy * dy)
-      , count = speed * 10
-      , k1 = -5 - speed / 3
-      ;
-
-  // Bounce off the walls.
-  if (x < 0 || x > width) spermatozoon.vx *= -1;
-  if (y < 0 || y > height) spermatozoon.vy *= -1;
-
-  // Swim!
-  for (var j = 0; ++j < m;) {
-    var vx = x - path[j][0]
-      , vy = y - path[j][1]
-      , k2 = Math.sin(((spermatozoon.count += count) + j * 3) / 300) / speed
-      ;
-    path[j][0] = (x += dx / speed * k1) - dy * k2;
-    path[j][1] = (y += dy / speed * k1) + dx * k2;
-    speed = Math.sqrt((dx = vx) * dx + (dy = vy) * dy);
+  function headTransform(d) {
+    return "translate(" + d.path[0] + ")rotate(" + Math.atan2(d.vy, d.vx) * degrees + ")";
   }
-}
-
-head.attr("transform", headTransform);
-  tail.attr("d", tailPath);
-});
-
-function headTransform(d) {
-  return "translate(" + d.path[0] + ")rotate(" + Math.atan2(d.vy, d.vx) * degrees + ")";
-}
-
-function tailPath(d) {
-  return "M" + d.join("L");
 }

@@ -51,11 +51,23 @@ io.on('connection', function (socket) {
       });
     });
 
-    socket.on('startParameters', function(params) {
+    socket.on('startWithParameters', function(params) {
         console.log('herbivore count: ' + params.herbivoreCount);
+        socket.emit('activity', getInitialPlacements(params));
     })
 
   });
+
+function getInitialPlacements(params) {
+  var initials = [];
+  for(var i = 0; i < params.herbivoreCount; i++) {
+    initials.push({
+        x: Math.random() * params.ecosystem.width
+      , y: Math.random() * params.ecosystem.height
+    })
+  }
+  return initials;
+}
 
 function updateRoster() {
   async.map(

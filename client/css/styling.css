@@ -4,12 +4,11 @@ body {
 }
 
 ellipse {
-  fill: #f00;
   fill: silver;
 }
 
 path {
-  fill: none;
+  fill: #00f;
   stroke: #000;
   stroke-linecap: round;
 }
